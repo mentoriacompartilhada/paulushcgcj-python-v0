@@ -25,6 +25,7 @@ jobs:
         run: |
           python mentoriacompartilhada/manage.py runserver 0.0.0.0:8888 &
           echo $! > app.pid
+          sleep 2s
       - name: Run Newman Tests
         uses: matt-ball/newman-action@master
         with:
