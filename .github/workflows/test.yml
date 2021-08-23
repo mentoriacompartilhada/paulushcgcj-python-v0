@@ -23,9 +23,9 @@ jobs:
           flake8 hello/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Run on BG
         run: |
-          python mentoriacompartilhada/manage.py runserver 0.0.0.0:8888 &
+          python mentoriacompartilhada/manage.py runserver 8888 &
           echo $! > app.pid
-          sleep 2s
+          sleep 5s
       - name: Run Newman Tests
         uses: matt-ball/newman-action@master
         with:
