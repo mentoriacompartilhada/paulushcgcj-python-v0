@@ -1,0 +1,32 @@
+name: Automatic test on Push
+on: push
+
+jobs:
+  Tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.6
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.6
+      - name: Install Dependencies
+        run: |
+          if [ -f requirements.txt ]; then python -m pip install --upgrade pip; fi
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Install Flake8 and check for errors
+        run: |
+          pip install flake8
+          flake8 hello/ --count --select=E1,E101,E117,E9,F63,F7,F82 --show-source --statistics
+          flake8 mentoriacompartilhada/ --count --select=E1,E101,E117,E9,F63,F7,F82 --show-source --statistics
+          flake8 mentoriacompartilhada/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+          flake8 hello/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      - name: Run on BG
+        run: |
+          python mentoriacompartilhada/manage.py runserver 0.0.0.0:8888 &
+          echo $! > app.pid
+      - name: Run Newman Tests
+        uses: matt-ball/newman-action@master
+        with:
+          collection: test.postman_collection
+          environment: test.postman_environment
