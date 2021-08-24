@@ -1,3 +1,4 @@
+"""Define urls to be exposed"""
 from django.urls import path
 
 from . import views
