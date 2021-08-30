@@ -56,7 +56,7 @@ def pessoa_details(request, pk):
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
-        Pessoa.delete()
+        Pessoa.delete(pessoa)
         return HttpResponse(status=204)
 @csrf_exempt
 def hello(request):
