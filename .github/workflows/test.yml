@@ -16,6 +16,8 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi      
       - name: Run on BG
         run: |
+          python mentoriacompartilhada/manage.py makemigrations
+          python mentoriacompartilhada/manage.py migrate
           python mentoriacompartilhada/manage.py runserver 8888 &
           echo $! > app.pid
           sleep 5s
