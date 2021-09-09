@@ -6,7 +6,6 @@ from rest_framework.parsers import JSONParser
 from hello.serializers import PessoaSerializer
 from hello.models import Pessoa
 
-
 @csrf_exempt
 @api_view(['GET','POST'])
 def pessoa_list(request):
@@ -37,7 +36,7 @@ def pessoa_list(request):
 
 @csrf_exempt
 @api_view(['GET','PUT','DELETE'])
-def pessoa_details(request, pk):    
+def pessoa_details(request, pk):
     try:
         pessoa = Pessoa.objects.get(pk=pk)
     except Pessoa.DoesNotExist:
@@ -58,6 +57,7 @@ def pessoa_details(request, pk):
     elif request.method == 'DELETE':
         Pessoa.delete(pessoa)
         return HttpResponse(status=204)
+
 @csrf_exempt
 def hello(request):
-    return HttpResponse('Hello World!',status=200)
+    return HttpResponse('Hello World',status=200)
