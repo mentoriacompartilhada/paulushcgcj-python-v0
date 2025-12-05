@@ -1,3 +1,4 @@
-Django==3.2.19
+Django==4.2.27
 django-rest-swagger==2.2.0
 djangorestframework==3.12.4
+sqlparse>=0.5.4 # not directly required, pinned by Snyk to avoid a vulnerability
