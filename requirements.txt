@@ -1,3 +1,4 @@
 Django==3.2.19
 django-rest-swagger==2.2.0
 djangorestframework==3.12.4
+urllib3>=2.6.3 # not directly required, pinned by Snyk to avoid a vulnerability
